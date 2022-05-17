@@ -8,14 +8,6 @@
             <section class="container text-center mt-5">
                 
                 <div class="container">
-                    <!-- <hr>
-                    <h3><%= pergunta.titulo %></h1>
-                    <hr>
-                    <p><%= pergunta.descricao %></p>                                    
-                    <hr>
-                    <form action="">
-                        <textarea name="corpo" id="corpo" cols="30" rows="10" class="form-control"></textarea>
-                    </form> -->
                     <form action="/resposta" method="post">
                         <div class="card text-center">
                             <div class="card-header">
@@ -34,6 +26,18 @@
                             </div>
                         </div>                        
                     </form>
+
+                    <hr>
+                    <h3>Respostas</h3>
+                    <hr>
+                    <% respostas.forEach(resposta => {%>
+                        <br>
+                        <div class="card">
+                            <div class="card-body">
+                                <p><%= resposta.corpo %></p>
+                            </div>
+                        </div>
+                    <% }) %>                    
             </section>
         </main>
     </body>

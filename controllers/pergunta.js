@@ -1,4 +1,5 @@
 const Pergunta = require("../model/Pergunta");
+const Resposta = require("../model/Resposta");
 
 const novaPergunta = (req, res, next) => {
     res.render('pergunta/pergunta');
@@ -33,9 +34,14 @@ const buscarPergunta = (req, res, next) => {
         where: {id: id}
     }).then(pergunta => {
         if (pergunta != undefined){
-            res.render("resposta/index", {
-                pergunta: pergunta
-            });
+            Resposta.findAll({
+                where: {perguntaId: pergunta.id}
+            }).then(respostas => {
+                res.render("resposta/index", {
+                    pergunta: pergunta, 
+                    respostas: respostas,
+                });
+            })
         } else {
             res.redirect("/");
         }
