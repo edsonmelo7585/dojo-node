@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const connection = require("./db/database");
-const Pergunta = require("./db/model/Pergunta");
+const routes = require('./routes/routes');
 
 connection
     .authenticate()
@@ -21,29 +21,10 @@ app.use(express.static('public'));
 //body-parser
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+// app.use(express.json());
 
-//rotas
-app.get('/', (req, res) =>{    
-    res.render('index');
-});
+app.use('/', routes);
 
-app.get('/perguntar', (req, res) =>{
-    res.render('perguntar/perguntar');
-});
-
-app.post('/salvarpergunta', (req, res) =>{
-    var titulo = req.body.titulo;
-    var descricao = req.body.descricao;
-    Pergunta.create({
-        titulo: titulo,
-        descricao: descricao
-    }).then(() => {        
-        console.log("Pergunta salva com sucesso!");
-        res.redirect("/perguntar");
-    });
-    //res.send("<h1>Formulário recibido!</h1><p>Título:"+ titulo + "</p><p>Descrição:"+ descricao + "</p>");
+const listener = app.listen(process.env.PORT || 8080, () => {
+    console.log('App rodando na porta: ' + listener.address().port)
 })
-
-app.listen(8080, () =>{
-    console.log("App rodando!");
-});

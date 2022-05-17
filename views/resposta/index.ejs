@@ -1,0 +1,41 @@
+<html lang="pt-BR">
+    <%- include('../partials/header.ejs') %>    
+    <body>
+        <header>
+            <%- include('../partials/navbar.ejs'); %>    
+        </header>                
+        <main>        
+            <section class="container text-center mt-5">
+                
+                <div class="container">
+                    <!-- <hr>
+                    <h3><%= pergunta.titulo %></h1>
+                    <hr>
+                    <p><%= pergunta.descricao %></p>                                    
+                    <hr>
+                    <form action="">
+                        <textarea name="corpo" id="corpo" cols="30" rows="10" class="form-control"></textarea>
+                    </form> -->
+                    <form action="/resposta" method="post">
+                        <div class="card text-center">
+                            <div class="card-header">
+                                <%= pergunta.titulo %>
+                            </div>
+                            <div class="card-body">
+                              <h5 class="card-title"><%= pergunta.descricao %></h5>
+                              <hr>
+                              <p class="card-text">Resposta</p>
+                              <hr>
+                              <input type="hidden" name="perguntaId" id="perguntaId" value="<%= pergunta.id %>">
+                              <textarea name="corpo" id="corpo" cols="30" rows="10" class="form-control"></textarea>
+                            </div>
+                            <div class="card-footer text-muted">
+                                <button type="submit" class="btn btn-primary">Responder</button>
+                            </div>
+                        </div>                        
+                    </form>
+            </section>
+        </main>
+    </body>
+    <%- include('../partials/scripts.ejs'); %>
+</html>
